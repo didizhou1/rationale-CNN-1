@@ -36,7 +36,7 @@ import numpy as np
 
 from keras.optimizers import SGD, RMSprop
 from keras import backend as K 
-K.set_image_dim_ordering("th")
+# K.set_image_dim_ordering("th")
 K.set_image_data_format("channels_first")
 
 from keras.models import Model, Sequential, model_from_json #load_model

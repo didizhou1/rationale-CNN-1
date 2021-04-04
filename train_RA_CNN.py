@@ -19,6 +19,8 @@ import numpy as np
 import gensim 
 from gensim.models import Word2Vec
 
+# import tensorflow as tf
+# from tensorflow import keras 
 from keras.callbacks import ModelCheckpoint
 
 

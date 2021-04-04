@@ -1,3 +1,5 @@
+<!-- THEANO_FLAGS=mode=FAST_RUN,device=gpu,floatX=float32 python3 train_RA_CNN.py --inifile=movies_config.ini --sentence-epochs=15 --batch-size=50 --document-epochs=200 --dropout-document=0.5 --dropout-sentence=0.7 --name=movies --mf=25000 --max-doc-length=40 --max-sent-length=20 --shuffle --val-split=.1 --num-filters=20 -->
+
 # rationale-CNN
 A [Keras](http://keras.io/) implementation of our CNNs with "rationales". Reference article: [https://arxiv.org/abs/1605.04469](https://arxiv.org/abs/1605.04469). Citation:
 
