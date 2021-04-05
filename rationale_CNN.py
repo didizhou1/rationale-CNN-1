@@ -411,8 +411,15 @@ class RationaleCNN:
         allow convenient access to sentence-level predictions, after training
         '''
         sent_prob_outputs = self.doc_model.get_layer("sentence_predictions")
-        sent_model = K.function(inputs=self.doc_model.inputs, #Input(self.doc_model.inputs + K.learning_phase())
-                        outputs=[sent_prob_outputs.output])
+        # sent_model = K.function(inputs=[self.doc_model.inputs, K.learning_phase()],
+        #                 outputs=[sent_prob_outputs.output])
+
+        partial_model = Model(self.doc_model.inputs, sent_prob_outputs.output)
+
+        if K.learning_phase():
+          sent_model = partial_model(self.doc_model.inputs, training=True)
+        else:
+          sent_model = partial_model(self.doc_model.inputs, training=False)
         self.sentence_prob_model = sent_model
 
 
