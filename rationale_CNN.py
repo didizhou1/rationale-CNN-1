@@ -300,7 +300,7 @@ class RationaleCNN:
         #   (batch, channels, doc_len, (word_in_sent x embedding_dim))
         x = Reshape((1, self.preprocessor.max_doc_len, 
                      self.preprocessor.max_sent_len*self.preprocessor.embedding_dims), 
-                     name="reshape")(x)
+                     name="reshape1")(x)
         #x = Reshape((self.preprocessor.max_doc_len, 
         #             self.preprocessor.max_sent_len*self.preprocessor.embedding_dims), 
         #             name="reshape")(x)
@@ -411,7 +411,7 @@ class RationaleCNN:
         allow convenient access to sentence-level predictions, after training
         '''
         sent_prob_outputs = self.doc_model.get_layer("sentence_predictions")
-        sent_model = K.function(inputs=self.doc_model.inputs + [K.learning_phase()], 
+        sent_model = K.function(inputs=self.doc_model.inputs, #Input(self.doc_model.inputs + K.learning_phase())
                         outputs=[sent_prob_outputs.output])
         self.sentence_prob_model = sent_model
 
