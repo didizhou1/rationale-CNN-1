@@ -53,6 +53,7 @@ from keras.preprocessing.text import text_to_word_sequence, Tokenizer
 from keras.callbacks import ModelCheckpoint, EarlyStopping
 from keras.constraints import maxnorm
 from keras.regularizers import l2
+from tensorflow.python.keras import backend
 
 class RationaleCNN:
 
@@ -411,15 +412,8 @@ class RationaleCNN:
         allow convenient access to sentence-level predictions, after training
         '''
         sent_prob_outputs = self.doc_model.get_layer("sentence_predictions")
-        # sent_model = K.function(inputs=[self.doc_model.inputs, K.learning_phase()],
-        #                 outputs=[sent_prob_outputs.output])
-
-        partial_model = Model(self.doc_model.inputs, sent_prob_outputs.output)
-
-        if K.learning_phase():
-          sent_model = partial_model(self.doc_model.inputs, training=True)
-        else:
-          sent_model = partial_model(self.doc_model.inputs, training=False)
+        sent_model = K.function(inputs=self.doc_model.inputs + [K.learning_phase()],
+                        outputs=[sent_prob_outputs.output])
         self.sentence_prob_model = sent_model
 
 
