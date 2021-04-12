@@ -4,11 +4,6 @@ import pandas as pd
 # 3 -> no quoting
 movies_data = pd.read_csv("data/movies.txt", delimiter=",", quoting=0)
 
-# document level labels: move from {0, 1} -> {-1, 1}
-# doc_lbls = movies_data["doc_lbl"]
-# doc_lbls_neg_one = doc_lbls.replace(0, -1)
-# movies_data["doc_lbl"] = doc_lbls_neg_one
-
 # recode rationales so that sentences are (1) or are not (-1)
 # rationales; polarity is implicit
 sent_lbls = movies_data["sentence_lbl"]
