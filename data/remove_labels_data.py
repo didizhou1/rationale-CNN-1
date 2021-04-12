@@ -18,9 +18,9 @@
 with open('data/movies_labelled.txt') as infile, open('data/movies_unlabelled.txt', 'w') as outfile:
     for line in infile:
         words = line.rsplit(',', 1)
+        # if len(words) > 1:
+        #     words[1] = '-1'
         if len(words) > 1:
-            words[1] = '-1'
-        if len(words) > 1:
-            outfile.write(words[0] + "," + words[1] + "\n")
+            outfile.write(words[0] + ",-1\n")
         else:
             outfile.write(words[0] + "\n")
